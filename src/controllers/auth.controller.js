@@ -40,11 +40,49 @@ async function registerUserController(req, res) {
     res.status(201).json({
         message: "User registered successfully",
         user: {
-            _id: user._id,
+            id: user._id,
             username: user.username,
             email: user.email
         }
     });
 }
 
-module.exports = { registerUserController };
+/**
+ * @name loginUserController
+ * @description Login a user, expects email and password in the request body
+ * @access Public
+ */
+async function loginUserController(req, res) {
+
+    const { email, password } = req.body;
+
+    const user = await userModel.findOne({ email });
+
+    if(!user) {
+        return res.status(400).json({ message: "User with this email does not exist" });
+    }
+
+    const isPasswordValid = await bycrypt.compare(password, user.password);
+
+    if(!isPasswordValid) {
+        return res.status(400).json({ message: "Invalid password" });
+    }
+
+    const token = jwt.sign({ id: user._id }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: "1d" }
+    );
+
+    res.cookie("token", token);
+
+    res.status(200).json({
+        message: "User logged in successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email
+        }
+    });
+}
+
+module.exports = { registerUserController, loginUserController };
