@@ -51,6 +51,9 @@ export const useAuth = () => {
             setUser(data.user)
             setLoading(false)
         }
+
+        getAndSetUser()
+        
     }, [])
 
     return {user, loading, handleRegister, handleLogin, handleLogout}
