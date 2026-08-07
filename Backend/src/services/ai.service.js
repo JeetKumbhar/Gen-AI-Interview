@@ -10,12 +10,13 @@ const interviewReportSchema = z.object({
     technicalQuestions: z.array(z.object({
         question: z.string().describe("The technical question can be asked in the interview."),
         intention: z.string().describe("The intention of interviewer behind the technical question."),
-        answer: z.string().describe("how to answer this question, what points to cover, what approach to take etc.")
+        answer: z.string().describe("Actionable coaching guidance on what to say, written as direct imperative instructions (e.g. 'Explain the phases of the event loop... Mention the role of the Libuv library... Discuss the difference between microtasks and macrotasks...'). Do NOT start with phrases like 'The candidate should' or 'The candidate should explain' — begin directly with an imperative verb such as Explain, Discuss, Mention, or Highlight."
+)
     })).describe("Technical questions that can be asked in the interview, along with their intention and answer."),
     behavioralQuestions: z.array(z.object({
         question: z.string().describe("The behavioral question can be asked in the interview."),
         intention: z.string().describe("The intention of interviewer behind the behavioral question."),
-        answer: z.string().describe("how to answer this question, what points to cover, what approach to take etc.")
+        answer: z.string().describe("Actionable coaching guidance on how to answer this question, what points to cover, what approach to take etc.")
     })).describe("Behavioral questions that can be asked in the interview, along with their intention and answer."),
     skillGaps: z.array(z.object({   
         skill: z.string().describe("The skill that the candidate is lacking or needs improvement."),
@@ -46,9 +47,12 @@ async function generateInterviewReport({resume, selfDescription, jobDescription}
         }
     })
 
-    const report = interviewReportSchema.parse(JSON.parse(response.text))
-    console.log(JSON.stringify(report, null, 2))
-    return report
+    // const report = interviewReportSchema.parse(JSON.parse(response.text))
+    // console.log(JSON.stringify(report, null, 2))
+    // return report
+
+    return JSON.parse(response.text)
 }
 
 module.exports = generateInterviewReport;
+
