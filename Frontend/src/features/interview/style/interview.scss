@@ -425,10 +425,22 @@ $severity-low: #3fb950;
     &__sub {
         margin: 0;
         font-size: 0.75rem;
-        color: $severity-low;
         text-align: center;
     }
+
+    &.score--high &__sub {
+        color: $severity-low;
+    }
+
+    &.score--mid &__sub {
+        color: $severity-medium;
+    }
+
+    &.score--low &__sub {
+        color: $severity-high;
+    }
 }
+
 
 // Skill Gaps
 .skill-gaps {
