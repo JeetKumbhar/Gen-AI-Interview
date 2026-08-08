@@ -8,6 +8,7 @@ const Home = () => {
     const { loading, generateReport,reports } = useInterview()
     const [ jobDescription, setJobDescription ] = useState("")
     const [ selfDescription, setSelfDescription ] = useState("")
+    const [ error, setError ] = useState("") 
     const resumeInputRef = useRef()
 
     const navigate = useNavigate()
@@ -120,6 +121,7 @@ const Home = () => {
 
                 {/* Card Footer */}
                 <div className='interview-card__footer'>
+                    {error && <p className="error-message">{error}</p>}
                     <span className='footer-info'>AI-Powered Strategy Generation &bull; Approx 30s</span>
                     <button
                         onClick={handleGenerateReport}
