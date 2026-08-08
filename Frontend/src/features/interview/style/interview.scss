@@ -513,8 +513,14 @@ $severity-low: #3fb950;
         max-width: none;
     }
 
-    .interview-nav {
+    .interview-sidebar {
         order: 1;
+        padding: 0.75rem 0.9rem 0.5rem;
+        gap: 0.9rem;
+    }
+
+    .interview-nav {
+        order: 2;
         width: 100%;
         padding: 0.75rem 0.75rem 0.5rem;
         display: flex;
@@ -541,24 +547,19 @@ $severity-low: #3fb950;
             justify-content: center;
             font-size: 0.75rem;
         }
-
-        .button.primary-button {
-            width: 100%;
-            justify-content: center;
-            margin-top: 0.25rem;
-        }
-    }
-
-    .interview-sidebar {
-        order: 2;
-        padding: 0.75rem 0.9rem 0.5rem;
-        gap: 0.9rem;
     }
 
     .interview-content {
         order: 3;
         padding: 0.5rem 0.9rem 1.5rem;
         max-height: none;
+    }
+
+    .interview-nav .button.primary-button {
+        order: 4;
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.25rem;
     }
 
     .match-score {
