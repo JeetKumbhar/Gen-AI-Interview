@@ -14,7 +14,7 @@ export const useAuth = () => {
             const data = await login({ email, password })
             setUser(data.user)
         } catch(err) {
-
+            throw err
         } finally {
             setLoading(false)
         } 
@@ -26,7 +26,7 @@ export const useAuth = () => {
             const data = await register({ username, email, password})
             setUser(data.user)
         } catch (err) {
-
+            throw err
         } finally {
             setLoading(false)
         }  
@@ -38,7 +38,7 @@ export const useAuth = () => {
             const data = await logout()
             setUser(null)
         } catch (err) {
-
+            throw err
         } finally {
             setLoading(false)
         }     
@@ -51,7 +51,7 @@ export const useAuth = () => {
                 const data = await getMe()
                 setUser(data.user)
             } catch (err) {
-                
+                setUser(null) // no valid session — don't leave user in a stale state
             } finally {
                 setLoading(false)
             }
